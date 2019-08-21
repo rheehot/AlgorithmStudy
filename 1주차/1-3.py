@@ -8,14 +8,8 @@ def DayStr2Int(day_temp,str_date):
     for i in range(month-1):
         total_day += day_list[i]
     total_day += day
-    if day_temp > total_day:
-        return total_day
-    elif day_temp == total_day:
-        return total_day
-    else:
-        return total_day
-    ## 절대 안되는 경우 시작시간은 범위 안인데 , 끝시간이 범위 밖인경우
-# 테스트 케이스 입력
+    return total_day
+    
 testcase = int(input())
 # 각 경우마다 문자열로 시작일 마감일이 들어옴
 start_date = int(0); end_date = int(0)
@@ -31,14 +25,18 @@ for i in range(testcase):
             start_date = start_temp
             end_date = end_temp
         else:
-            print("no")
+            print("No")
             flag = False
             break
+    elif end_date < start_temp:
+        pass 
+    elif end_temp < start_date:
+        pass
     else:
         if end_date <= end_temp:
             pass
         else:
-            print("no")
+            print("No")
             flag = False
             break
 if flag:
