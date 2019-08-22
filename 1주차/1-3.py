@@ -25,16 +25,36 @@ for i in range(test_case):
     else:
         start_temp = Day2Int(start_date)
         end_temp = Day2Int(end_date)
+# 현재 잘못되고 있는 조건 19.08.22
+# 3 입력 -> 9/7 12/27, 1/25 12/17 (여기가 추가가 안됌), 2/27 3/5 (이상하게 이게 추가됌!)
         for k in range(len(day_stack_list)):
-            if day_stack_list[k][0] >= start_temp and day_stack_list[k][1] <= end_temp:
-                # 한쪽만 크더라도 늘어나야하는데 그 작업을 안함!!
+            if day_stack_list[k][0] > start_temp and day_stack_list[k][1] < end_temp:
+                # 시작하는 일정과 끝나는 일정이 이전의 일정을 포함하는 경우
                 day_stack_list.remove(day_stack_list[k])
-                day_stack_list.append((start_temp,end_temp)) 
-            # 앞의 블럭을 포함하는 블럭이니 해당 데이터만 존재하면 됌
-            # 앞에 것들을 포함하는 것들 다 삭제!
-        print(day_stack_list)
+                day_stack_list.append((start_temp,end_temp))                
+            elif day_stack_list[k][0] == start_temp and day_stack_list[k][1] < end_temp:
+                # 끝나는 일정만 더 긴 경우 ( 기준이 변경되야 함 )
+                day_stack_list.remove(day_stack_list[k])
+                day_stack_list.append((start_temp,end_temp))
+            elif day_stack_list[k][0] > start_temp and day_stack_list[k][1] == end_temp:
+                # 시작하는 일정만 더 빠른 경우 ( 기준이 변경되야 함 )
+                day_stack_list.remove(day_stack_list[k])
+                day_stack_list.append((start_temp,end_temp))
+            elif day_stack_list[k][0] > end_temp:
+                day_stack_list.append((start_temp,end_temp))
+                # 일정이 등록되어 있는 것들보다 이전인 경우 
+            elif day_stack_list[k][1] < start_temp:
+                day_stack_list.append((start_temp,end_temp))
+                # 일정이 등록되어 있는 것들 보다 이후인 경우
+            elif start_temp > day_stack_list[k][0] and end_temp < day_stack_list[k][1]:
+                pass
+            else:
+                # 이 이외의 경우는 없다고 보면 될듯..
+                pass
+                # 앞의 블럭을 포함하는 블럭이니 해당 데이터만 존재하면 됌
+                # 앞에 것들을 포함하는 것들 다 삭제!
+print(day_stack_list)
         # 앞서 등록된 stack에 포함되는지 확인 , 
-
         # 그 범위보다 큰지 확인
 
         # 아얘 다르면 추가 (결국 모든 범위를 알아야하네)
