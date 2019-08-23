@@ -19,7 +19,7 @@ day_stack_list = list() #빈 배열 선언
 for i in range(test_case):
     # 여기에서 시작일, 끝나는 일 입력
     start_date, end_date = input().split()
-    start_temp = None ; end_temp = None
+    start_temp = None ; end_temp = None 
     if len(day_stack_list)==0:
         day_stack_list.append((Day2Int(start_date),Day2Int(end_date)))
     else:
@@ -28,38 +28,33 @@ for i in range(test_case):
 # 현재 잘못되고 있는 조건 19.08.22
 # 3 입력 -> 9/7 12/27, 1/25 12/17 (여기가 추가가 안됌), 2/27 3/5 (이상하게 이게 추가됌!)
         for k in range(len(day_stack_list)):
-            if day_stack_list[k][0] > start_temp and day_stack_list[k][1] < end_temp:
+            if day_stack_list[k][0] > start_temp and day_stack_list[k][1] < end_temp and (start_temp,end_temp) not in day_stack_list:
                 # 시작하는 일정과 끝나는 일정이 이전의 일정을 포함하는 경우
                 day_stack_list.remove(day_stack_list[k])
                 day_stack_list.append((start_temp,end_temp))                
-            elif day_stack_list[k][0] == start_temp and day_stack_list[k][1] < end_temp:
+            elif day_stack_list[k][0] == start_temp and day_stack_list[k][1] < end_temp and (start_temp,end_temp) not in day_stack_list:
                 # 끝나는 일정만 더 긴 경우 ( 기준이 변경되야 함 )
                 day_stack_list.remove(day_stack_list[k])
                 day_stack_list.append((start_temp,end_temp))
-            elif day_stack_list[k][0] > start_temp and day_stack_list[k][1] == end_temp:
+            elif day_stack_list[k][0] > start_temp and day_stack_list[k][1] == end_temp and (start_temp,end_temp) not in day_stack_list:
                 # 시작하는 일정만 더 빠른 경우 ( 기준이 변경되야 함 )
                 day_stack_list.remove(day_stack_list[k])
                 day_stack_list.append((start_temp,end_temp))
-            elif day_stack_list[k][0] > end_temp:
-                day_stack_list.append((start_temp,end_temp))
-                # 일정이 등록되어 있는 것들보다 이전인 경우 
-            elif day_stack_list[k][1] < start_temp:
-                day_stack_list.append((start_temp,end_temp))
-                # 일정이 등록되어 있는 것들 보다 이후인 경우
-            elif start_temp > day_stack_list[k][0] and end_temp < day_stack_list[k][1]:
-                pass
             else:
-                # 이 이외의 경우는 없다고 보면 될듯..
-                pass
-                # 앞의 블럭을 포함하는 블럭이니 해당 데이터만 존재하면 됌
-                # 앞에 것들을 포함하는 것들 다 삭제!
+                if (start_temp,end_temp) not in day_stack_list:
+                    day_stack_list.append((start_temp,end_temp))
+                # 일정이 등록되어 있는 것들보다 이전인 경우 
+            print(day_stack_list)
+        
 print(day_stack_list)
-        # 앞서 등록된 stack에 포함되는지 확인 , 
-        # 그 범위보다 큰지 확인
-
-        # 아얘 다르면 추가 (결국 모든 범위를 알아야하네)
-    # 위의 결과는 mm/dd 형태의 string 두개
-    # stack에 넣을 때, date형태가 아닌 day형태로 두겠음
+day_list = list()
+# 최초 생각 , 끝날과 시작날의 차이를 구해서, 그것을 기준으로 sort를 하고 최고 범위의 index부터 고정해두고 범위에서 벗어나는지 안벗어나는지 확인
+# 최고 범위를 정하고 나면, 안에서 꼬이는것을 체크하지 못함
+# 따라서 새로운 방법을 고안해야함
+for i in range(len(day_stack_list)):#
+    day_list.append(day_stack_list[i][1]-day_stack_list[i][0])
+print(day_list)
+# 정렬을 날이 긴 기준으로 정렬하자!!
 
 
 # 5
