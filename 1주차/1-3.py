@@ -49,7 +49,7 @@ for i in range(test_case):
 print(day_stack_list)
 day_list = list()
 # 최초 생각 , 끝날과 시작날의 차이를 구해서, 그것을 기준으로 sort를 하고 최고 범위의 index부터 고정해두고 범위에서 벗어나는지 안벗어나는지 확인
-# 최고 범위를 정하고 나면, 안에서 꼬이는것을 체크하지 못함
+# 최고 범위를 정하고 나면, 안에서 꼬이는것을 체크하지 못함 
 # 따라서 새로운 방법을 고안해야함
 for i in range(len(day_stack_list)):#
     day_list.append(day_stack_list[i][1]-day_stack_list[i][0])
