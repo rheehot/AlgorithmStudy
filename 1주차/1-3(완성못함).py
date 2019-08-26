@@ -1,3 +1,8 @@
+# 모든 입력값을 리스트에 저장받고 해당 저장받은 값을 sort할 수 있도록 변경한다.
+# 변경된 값에 대해서 각각 처리할 수 있도록 한당
+
+
+
 # 방법을 변경해 보도록 합시다
 # 입력받는 곳을 스택이라 생각합시다.
 # 입력받은 값이 최대 범위이고 이전 범위를 포함한다면 스택에서 버립시다 
@@ -27,6 +32,10 @@ for i in range(test_case):
         end_temp = Day2Int(end_date)
 # 현재 잘못되고 있는 조건 19.08.22
 # 3 입력 -> 9/7 12/27, 1/25 12/17 (여기가 추가가 안됌), 2/27 3/5 (이상하게 이게 추가됌!)
+# (1) 2/1, 3/8 -> (2) 1/1 1/2 -> (3) 
+
+# len(day_stack_list) 부분에서 길이가 가변적이니까, 시간복잡도도 늘어나고,
+# 조건에 대해서 거르고 입력된 값에 대해서 다시한번 체크해서 저장할 수 있도록 해야한다.
         for k in range(len(day_stack_list)):
             if day_stack_list[k][0] > start_temp and day_stack_list[k][1] < end_temp and (start_temp,end_temp) not in day_stack_list:
                 # 시작하는 일정과 끝나는 일정이 이전의 일정을 포함하는 경우
