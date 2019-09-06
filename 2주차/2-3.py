@@ -27,24 +27,32 @@
 
 input_case = int(input())
 test_list = list(map(int,input().split()))
-result = []
-minus_reuslt = []
-# 전체 구간의 합을 구하는데 append를 구분짓는 구분자가 마이너스값(-a)로 제한둔다
-if len(test_list) != input_case:
-    pass # 입력값이 적으니, 수행할 수 없음
-else:
-    print(sum(test_list))
-    temp = 0
-    for i in range(input_case):
-        if test_list[i] < 0:
-            result.append(temp)
-            minus_reuslt.append(test_list[i])
-            temp = 0
+plus_temp = 0
+minus_temp = 0
+plus_result = []
+minus_result = []
+plus_flag = False
+# 무조건 양수부터 주워야 한다고 생각된다.
+# 그래서 처음부터 양수인 부분까지를 새로 도출해 낸다
+# 시작해 내고 나서, 각 요소들을 양수인 구간부터 더하면 되지 않을까?
+for i in range(input_case):
+    if test_list[i] > 0:
+        plus_flag = True
+    if plus_flag == True:
+        if test_list[i] > 0:
+            if minus_temp != 0:
+                minus_result.append(minus_temp)
+                minus_temp = 0
+            plus_temp += test_list[i]
+        elif test_list[i] == 0:
+            pass
         else:
-            temp += test_list[i]
-if temp > 0:
-    result.append(temp)
-print(minus_reuslt)
-print(result)
-# 리절트 결과와 각 연결고리의 마지막 행을 더한 값이 혹여나 더 클수 있으니 리스트를 종합하는 것을 한번 해보아야함
-# 처음부터 음수인 경우에 다 무시하고 양수부터 해야하는데 음..
+            if plus_temp != 0:
+                plus_result.append(plus_temp)
+                plus_temp = 0
+            minus_temp += test_list[i]
+if plus_temp != 0:
+    plus_result.append(plus_temp)
+    plus_temp = 0
+print(plus_result,minus_result)
+# 여기서 조합을 써보자
