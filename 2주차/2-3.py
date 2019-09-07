@@ -54,5 +54,15 @@ for i in range(input_case):
 if plus_temp != 0:
     plus_result.append(plus_temp)
     plus_temp = 0
-print(plus_result,minus_result)
-# 여기서 조합을 써보자
+
+# 위의 과정은 플러스 값을 모아둔 리스트, 마이너스 값을 모아둔 리스트를 모아두었다.
+# 아래는 처음부터 끝으로 가면서 나오는 값을 리스트에 저장하고 max함수를 통해 최대값을 출력하는 방법을 생각했다.
+new_temp = list()
+temp = 0
+for i in range(len(plus_result)-1):
+    temp += plus_result[i]
+    new_temp.append(temp)
+    temp += minus_result[i]
+temp += plus_result[-1]
+new_temp.append(temp)
+print(max(new_temp))
