@@ -23,12 +23,17 @@
 # 가만히 생각해보니까 불로 부터 시작하는 것이 아니라 연구원으로 부터 시작을 하는 것이 좋지아니한가?
 
 # 리스트의 형태로 넣어주고 해당 값을 기준으로 갈 수 있는 곳과 갈 수 없는 곳을 설정 할 수 있도록 해야한다.
+def root_graph(start_point,temp_list,target,map_list):
+    print(map_list)
+    for i in start_point:
+        if map_list[i[0]][i[1]] == "_" and i[0] == 0 :
+            if i[1] != "dsnLKFnzlkdfndlnfdfd아 이게아닌데..":
+                
+    return temp_list # 여기서 재귀를 써서 내보내야 할 것 같다.
+
 row, column = map(int,input().split())
 fire_list = list()
 target = (-1,-1)
-go_ok_list = list()
-no_ok_list = list()
-fi_re_list = list()
 for i in range(row):
     fire_list.append(list(input()))
 for i in range(row):
@@ -36,34 +41,10 @@ for i in range(row):
         if fire_list[i][j] == '&':
             target = (i,j)
             print("target 설정 : ",target)
-        elif fire_list[i][j] == '.':
-            go_ok_list.append((i,j))
-        elif fire_list[i][j] == '@':
-            fi_re_list.append((i,j))
-        else:
-            no_ok_list.append((i,j))
-
-# 좌표가 들어오면 +, - 위치를 각 과정마다 갈수있는 방향이 네방향 (1,1) 네번씩 돌려보면 되나
-# dx = list(-1,0,1,0)
-# dy = list(0,1,0,-1)
-def point(point,temp):
-    dx = list([-1, 0, 1 , 0])
-    dy = list([0, 1, 0, -1])
-    for i in range(4):
-        temp.append((point[0]+dx[i],point[1]+dy[i]))
-all_list = list ()
-for i in range(len(go_ok_list)):
-    point(go_ok_list[i],all_list)
-
-print("all_list:",all_list,"len:",len(all_list))
-all_list = list(set(all_list))
-print("all_list:",all_list,"len:",len(all_list))
-# 여기 범위 밖으로 넘어가는 것은 제거해야 하지 않나?..
-# print(go_ok_list)
-# print(no_ok_list)
-# print(fi_re_list)
-# graph = dict()
-# print(graph)
+graph = dict()
+print(graph)
+temp_list = list()
+root_graph(graph,temp_list,target,fire_list)
 
 # 여기서 리스트로 들어온 각 요소를 하나하나 target으로 삼고 할 수 있나?
 # 에이 그건 또 아니지;;;
