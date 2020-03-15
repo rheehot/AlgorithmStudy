@@ -64,19 +64,25 @@ class BinarySearchTree(object):
             node.right, deleted = self.deleteValue(node.right, key)
         return node, deleted
 
-array = [40, 4, 34, 45, 14, 55, 48, 13, 15, 49, 47]
 
-bst = BinarySearchTree()
-for x in array:
-    bst.insert(x)
 
-# Find
-print(bst.find(15)) # True
-print(bst.find(17)) # False
+if __name__ == "__main__":
+    array = [21, 28, 14, 32, 25, 18, 11, 30, 19, 15]
 
-# 여기 아래부터 제대로 실행은 되지 않지만, 찾기는 정상적으로 가능
-# Delete
-print(bst.delete(55)) # True
-print(bst.delete(14)) # True
-print(bst.delete(11)) # False
-            
+    bst = BinarySearchTree()
+    for x in array:
+        bst.insert(x)
+
+    print(bst)
+
+    # Find
+    print(bst.find(15)) # True
+    print(bst.find(17)) # False
+
+    # 여기 아래부터 제대로 실행은 되지 않지만, 찾기는 정상적으로 가능
+    # Delete
+    print(bst.delete(55)) # True
+    print(bst.delete(14)) # True
+    print(bst.delete(11)) # False
+
+
